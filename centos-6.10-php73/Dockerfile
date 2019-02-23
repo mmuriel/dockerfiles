@@ -23,7 +23,9 @@ RUN yum --enablerepo=remi-php73 install -y \
  php-ctype \
  php-bcmath \
  php-mysqlnd \
- php-gd
+ php-zip \
+ php-imap \
+ php-curl
 
 RUN adduser admin && mkdir /home/admin/app && chown -Rf admin:apache /home/admin/app && chmod 775 -Rf /home/admin/app && rm -f /etc/httpd/conf/httpd.conf
 COPY httpd.conf.template /etc/httpd/conf/httpd.conf
