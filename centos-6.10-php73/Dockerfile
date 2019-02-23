@@ -25,7 +25,9 @@ RUN yum --enablerepo=remi-php73 install -y \
  php-mysqlnd \
  php-gd
 
-RUN adduser admin && mkdir /home/admin/app && chown -Rf admin:apache /home/admin/app && rm -f /etc/httpd/conf/httpd.conf
+RUN adduser admin && mkdir /home/admin/app && chown -Rf admin:apache /home/admin/app && chmod 775 -Rf /home/admin/app && rm -f /etc/httpd/conf/httpd.conf
 COPY httpd.conf.template /etc/httpd/conf/httpd.conf
+RUN echo " " > /home/admin/.htaccess && chmod -Rf 775 /home/admin/.htaccess && chown -Rf admin:apache /home/admin/.htaccess
+RUN chown -Rf admin:apache /home/admin/ && chmod 755 /home/admin/
 RUN chmod 755 /bin/httpd-foreground
 
