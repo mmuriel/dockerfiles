@@ -20,6 +20,9 @@ Stack Instalado:
 	- php-ctype
 	- php-bcmath
 	- php-mysqlnd
+	- php-zip
+ 	- php-imap
+ 	- php-curl
 
 + wget
 + curl	
