@@ -46,6 +46,16 @@ RUN mkdir /var/www/app/public
 RUN echo "Starting container LAMP!" > /var/www/app/public/index.html
 RUN chown -Rf sientifica:www-data /var/www/app
 
+RUN rm -f /etc/alternatives/php
+RUN ln -s /usr/bin/php8.1 /etc/alternatives/php
+
+RUN rm -f /etc/alternatives/phar
+RUN ln -s /usr/bin/phar8.1 /etc/alternatives/phar
+
+RUN rm -f /etc/alternatives/phar.phar
+RUN ln -s /usr/bin/phar.phar8.1 /etc/alternatives/phar.phar
+
+RUN rm -f /etc/alternatives/phpdbg
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
