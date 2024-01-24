@@ -29,6 +29,7 @@ php8.1-zip \
 php8.1-imap \
 libapache2-mod-php8.1 \
 php8.1-curl \
+php8.1-ldap \
 php8.1-sqlite3
 RUN a2enmod rewrite
 RUN a2enmod ssl
