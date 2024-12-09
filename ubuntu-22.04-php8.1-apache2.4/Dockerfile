@@ -30,6 +30,7 @@ php8.1-imap \
 libapache2-mod-php8.1 \
 php8.1-curl \
 php8.1-ldap \
+php8.1-intl \
 php8.1-sqlite3
 RUN a2enmod rewrite
 RUN a2enmod ssl
@@ -59,7 +60,7 @@ RUN ln -s /usr/bin/phar.phar8.1 /etc/alternatives/phar.phar
 RUN rm -f /etc/alternatives/phpdbg
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+RUN php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
