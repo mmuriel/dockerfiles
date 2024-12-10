@@ -1,5 +1,5 @@
-# Use the official Ubuntu 22.04
-FROM ubuntu:22.04
+# Use the official Ubuntu 24.04
+FROM ubuntu:24.04
 
 RUN rm -f /etc/localtime && ln -s /usr/share/zoneinfo/America/Bogota /etc/localtime && date
 
@@ -12,8 +12,7 @@ RUN apt-get update && \
     wget \
     curl \
     git \
-    vim \
-    sqlite && \
+    vim &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -31,12 +30,18 @@ RUN curl https://pyenv.run | bash
 
 # Load pyenv automatically by adding
 # the following to ~/.bashrc:
-# RUN echo "export PATH="/root/.pyenv/bin:$PATH"
+#RUN echo "export PATH=/root/.pyenv/bin:$PATH"
 RUN echo $PATH
 ENV PATH="/root/.pyenv/bin:$PATH"
 RUN echo $PATH
 RUN eval "$(pyenv init -)"
 RUN eval "$(pyenv virtualenv-init -)"
+
+RUN echo 'export PYENV_ROOT="/root/.pyenv"' >> /root/.bashrc
+RUN echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> /root/.bashrc
+RUN echo 'eval "$(pyenv init -)"' >> /root/.bashrc
+RUN echo 'alias python=python3' >> /root/.bashrc
+RUN exec $SHELL
 
 # Create a directory for your web application
 WORKDIR /var/www/app
@@ -46,7 +51,6 @@ WORKDIR /var/www/app
 
 # Expose port 80 for Apache2
 EXPOSE 80
-
 # Start Apache2 on container startup
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 
