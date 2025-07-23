@@ -1,0 +1,12 @@
+flask
+transformers
+torch
+ftfy
+python-dotenv
+sentencepiece
+sacremoses
+python-jose
+flask-sqlalchemy
+flask-migrate
+pymysql
+pytest
