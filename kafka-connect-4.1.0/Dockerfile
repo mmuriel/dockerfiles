@@ -1,5 +1,5 @@
 # Dockerfile para Kafka Connect - Versión simplificada
-FROM apache/kafka:4.0.0
+FROM apache/kafka:4.1.0-rc2
 
 # Trabajar como root (más simple, evita problemas de usuarios)
 USER root
